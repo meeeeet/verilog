@@ -12,3 +12,7 @@ module fa(sum,carry,a,b,c);
 	or a5(carry,x,y,z);
 	
 endmodule
+
+
+//mod
+
