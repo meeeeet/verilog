@@ -21,5 +21,7 @@ module d_ff(D,CLK,Q,NQ);
 	
 	mod1 slave(X,clkn,Q,NQ);
 endmodule
+
+//temp
 	
 	
