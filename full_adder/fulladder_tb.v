@@ -2,7 +2,7 @@ module fulladder_tb;
   reg a,b,c;
   wire sum,carry;
   
-  full_adder uut(a,b,c,sum,carry);
+  fulladder uut(a,b,c,sum,carry);
   
   initial 
 begin
