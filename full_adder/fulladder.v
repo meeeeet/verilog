@@ -1,4 +1,4 @@
-module fa(sum,carry,a,b,c);
+module fulladder(sum,carry,a,b,c);
 	input a,b,c;
 	output sum,carry;
 	
@@ -12,5 +12,3 @@ module fa(sum,carry,a,b,c);
 	or a5(carry,x,y,z);
 	
 endmodule
-//done.
-
