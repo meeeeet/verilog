@@ -8,7 +8,6 @@ module fulladder(sum,carry,a,b,c);
 	and a2(x,a,b);
 	and a3(y,b,c);
 	and a4(z,c,a);
-	
 	or a5(carry,x,y,z);
 	
 endmodule
