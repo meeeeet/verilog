@@ -25,7 +25,6 @@ module seq_1001_mealy_tb;
         #20 in=0;
         #20 in=0;
         #20 in=1;
-        #20 in=1;
         #30 $finish;
     end
     
