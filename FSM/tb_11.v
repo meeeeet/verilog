@@ -2,11 +2,9 @@ module tb_11 (
     
 );
     reg in,clk;
-    wire out;
+    wire o;
     
-    seq_11 uut(in,clk,out);
-
-    //clock
+    seq_11 uut(in,clk,o);
     initial begin
         clk=0;
         forever begin
@@ -34,6 +32,6 @@ module tb_11 (
     end
 
     initial begin
-        $monitor("clk=%b in=%b out=%b",clk,in,out);
+        $monitor("clk=%b in=%b out=%b",clk,in,o);
     end
 endmodule
