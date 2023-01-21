@@ -1,5 +1,5 @@
 
-
+`timescale 1ns/1ps
 module sipo_tb;
 reg si,clk,rst;
 wire [3:0]so;
@@ -15,6 +15,8 @@ end
 
 initial
 begin
+    $dumpfile("test.vcd");
+    $dumpvars(0,sipo_tb);
   #8 si=1;
   #10 si=1;
   #10 si=0;
@@ -33,6 +35,7 @@ end
 
 initial
 begin
+
   $monitor("%b %b %b %b",clk,rst,si,so);
 end
 
