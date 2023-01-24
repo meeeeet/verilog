@@ -17,6 +17,8 @@ end
 
 initial
 begin
+    $dumpfile("wave.vcd");
+    $dumpvars(0,lift_tb);
     #1 floor=0;
     #20 floor=1;
     #20 floor=3;
