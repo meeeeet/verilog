@@ -1,6 +1,6 @@
 `timescale 1ns/1ns
 module clktb;
-wire clk_out;
+wire [1:0]clk_out;
 reg clk;
 
 clk_div uut(clk,clk_out);
