@@ -4,30 +4,33 @@
 
 
 module lock_tb;
-    wire digit_1,digit_2,digit_3,digit_4;
+    reg [3:0]digit;
     reg reset;
     reg clk;
     wire out;
     wire buzzer;
     wire [2:0]count;
     wire [3:0]cp;
-    reg [3:0]digit;
 
-    assign {digit_1,digit_2,digit_3,digit_4}=digit;
+    reg start;
+    wire [3:0]ci;
+
+  
 
 
 
-    lock test(digit_1,digit_2,digit_3,digit_4,
+    lock test(digit,
+    start,
     reset,
     clk,
     out,
     buzzer,
     count,
-    cp);
+    cp,ci);
 
     //clock
     initial begin
-        reset=0;
+        reset=1;
         clk=0;
         forever begin
             #5 clk=~clk;
@@ -35,18 +38,15 @@ module lock_tb;
     end
 
     initial begin
-        digit=4'b0000;
-        #8 reset=1;
-        #3 reset=0;
+        digit=4'b1010;
         #10 digit=4'b 1011;
         #10 digit=4'b 1111;
         #10 digit=4'b 1101;
         #10 digit=4'b 1100;
         #10 digit=4'b 0000;
-        #10 digit=4'b 1010;
-        #10 digit=4'b 1111;
-        #5 reset=1;
-        #5 reset=0;
+        #8 digit=4'b 1010;
+        //#10 digit=4'b 1111;
+        #6 digit=4'b 1111;
         #10 digit=4'b 1011;
         #10 digit=4'b 0001;
         #10 digit=4'b 1010;
@@ -60,10 +60,25 @@ module lock_tb;
         #10 $finish;
 
     end
+    initial
+    begin
+        start=1'b1;
+        #3 start=1'b0;
+        #2 start=1'b1;
+        #60 reset=0;
+        #2 reset=1;
+        #20 reset=0;
+        #1 reset=1;
+
+    end
+    initial begin
+        #135 reset=0;
+        #1 reset=1;
+    end
 
     initial begin
         $dumpfile("wave.vcd");
         $dumpvars(0,lock_tb);
-        $monitor("%b %b %b %b %b %d ",digit_1,digit_2,digit_3,digit_4,out,count);
+        $monitor("%b  %b %d ",digit,out,count);
     end
 endmodule
