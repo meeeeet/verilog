@@ -2,6 +2,9 @@
 /* -------------------------------------------------------------------------- */
 /*                                 Main module                                */
 /* -------------------------------------------------------------------------- */
+
+
+
 module lock(
     digit,
     start,
@@ -13,6 +16,7 @@ module lock(
     cp,
     ci
 );
+
 
     input [3:0]digit;
     input reset,clk,start;
@@ -34,7 +38,7 @@ module lock(
 
     compare cmp(clk,digit,current_pass,reset,wrong_attempt,out,start);
 
-    update u1(current_pass,digit,clk,reset,start,out);
+    update u1(current_pass,digit,reset,start,out);
 
     buzzer_ctrl buzz(wrong_attempt,buzzer,out);
 
@@ -57,14 +61,9 @@ module compare(
     output reg out;
     output reg [2:0]wrong_attempt;
 
-    always @(negedge clk or negedge reset or negedge start) begin
+    always @(negedge clk) begin
 
-        if(reset==0 || start==0)begin
-            //out=0;
-            wrong_attempt=3'b000;
-        end
-
-        else if(pass_in==current_pass) begin
+        if(pass_in==current_pass) begin
             out=1;
             wrong_attempt=3'b000;
         end
@@ -73,7 +72,6 @@ module compare(
             wrong_attempt=wrong_attempt+1;
             out=0;
         end
-
     end
 endmodule
 
@@ -81,16 +79,15 @@ endmodule
 module  update(
     current_pass,
     pass_serial,
-    clk,
     reset,
     start,
     out
 );
     input [3:0]pass_serial;
-    input clk,reset,out,start;
+    input reset,out,start;
     output reg [3:0]current_pass;
 
-    always @(negedge clk or negedge reset or negedge start) begin
+    always @(negedge reset or negedge start) begin
         if (reset==0) begin
 			if(out==1) begin
 					current_pass<=pass_serial;

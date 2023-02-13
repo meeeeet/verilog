@@ -39,7 +39,7 @@ module lock_tb;
 
     initial begin
         digit=4'b1010;
-        #10 digit=4'b 1011;
+        #20 digit=4'b 1011;
         #10 digit=4'b 1111;
         #10 digit=4'b 1101;
         #10 digit=4'b 1100;
