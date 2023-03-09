@@ -4,10 +4,11 @@
 module lift (
     clk,
     req_floor,
-    lift_state
+    lift_state,
+    reset
 );
 
-input clk;
+input clk,reset;
 input [1:0] req_floor;
 output reg [1:0]lift_state;
 
@@ -18,15 +19,25 @@ parameter idle = 2'b00,
 
 
 reg [1:0]current_floor;
-reg [2:0]count=1;
+reg [2:0]count;
 
 
-initial begin
+// initial begin
+//     lift_state=idle;
+//     current_floor=2'b00;
+// end
+
+always @(negedge clk or negedge reset) begin
+
+if (reset==1)
+begin
     lift_state=idle;
     current_floor=2'b00;
+    count=3'b001;
 end
 
-always @(negedge clk ) begin
+else
+begin
     case (lift_state)
         idle: begin
                 count=count+1;
@@ -88,7 +99,7 @@ always @(negedge clk ) begin
                 end
         end
     endcase
-
+end
 end
 
 endmodule

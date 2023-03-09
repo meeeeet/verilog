@@ -2,10 +2,10 @@ module lift_tb;
 reg clk;
 reg [1:0]floor;
 wire [1:0]lift_state;
+reg reset;
 
 
-
-lift test(clk,floor,lift_state);
+lift test(clk,floor,lift_state,reset);
 
 initial begin
     clk=1'b0;
@@ -19,6 +19,8 @@ initial
 begin
     $dumpfile("wave.vcd");
     $dumpvars(0,lift_tb);
+    reset=1;
+    #1 reset=0;
     #1 floor=0;
     #20 floor=1;
     #20 floor=3;
